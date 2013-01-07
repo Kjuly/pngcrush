@@ -3,3 +3,8 @@
 *~
 .*.sw[po]
 
+workspace_in/*
+!workspace_in/README.md
+workspace_out/*
+!workspace_out/README.md
+
