@@ -21,6 +21,8 @@ Its main purpose is to reduce the size of the PNG IDAT datastream by trying vari
 4. Copy the files in "workspace_out" folder to your desired place;  
 5. Rm all files in "workspace_in" & "workspace_out" folders.
 
+__Note__: The binary files under `./pngcrush/` were built by "GNU Make" (v3.81), you can build by yourself if want.  
+
 # License
 
 Pngcrush is open source and may be used, modified, and redistributed by anyone without paying a fee. The license, embedded in the file `pngcrush.c`, is equivalent but not identical to the libpng license found in the libpng file png.h.
