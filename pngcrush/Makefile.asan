@@ -1,6 +1,6 @@
-# Sample makefile for pngcrush using gcc and GNU make.
+# Sample makefile for pngcrush using gcc-ASAN and GNU make.
 # Glenn Randers-Pehrson
-# Last modified:  3 January 2010
+# Last modified:  30 December 2014
 #
 # Invoke this makefile from a shell prompt in the usual way; for example:
 #
@@ -19,7 +19,6 @@ LD = gcc
 RM = rm -f
 
 CPPFLAGS = -I.
-# CPPFLAGS="-I. -DPNG_DEBUG=5 -DPNG_RELEASE_BUILD=0"
 # CPPFLAGS = -I${ZINC} -I.
 
 # Work around zlib compiler bug in 1.2.6
@@ -33,10 +32,11 @@ TOOFAR_OK=
 #CFLAGS = -O2
 #CFLAGS = -O2 -fomit-frame-pointer -Wall
 #CFLAGS = -Os -fomit-frame-pointer -Wall
-CFLAGS = -O3 -funroll-loops -fomit-frame-pointer -Wall -Wshadow
-# [note that -Wall is a gcc-specific compilation flag ("all warnings on")]
+#CFLAGS = -O3 -funroll-loops -fomit-frame-pointer -Wall -Wshadow
+# [note that -Wall is a gcc-specific compilation flag "all warnings on")]
+CFLAGS=-g -fsanitize=address -fno-omit-frame-pointer
 
-LDFLAGS =
+LDFLAGS=-fsanitize=address
 O = .o
 E =
 

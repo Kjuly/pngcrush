@@ -20,9 +20,13 @@ ZLIB = /usr/local/lib
 CC = gcc
 LD = gcc
 RM = rm -f
-#CFLAGS = -I. -O -Wall
-#CFLAGS = -I. -O3 -fomit-frame-pointer -Wall
-CFLAGS = -I${ZINC} -I. -g -O3 -fomit-frame-pointer -Wall
+
+CPPFLAGS = -I.
+#CPPFLAGS = -I${ZINC} -I.
+
+#CFLAGS = -O -Wall
+#CFLAGS = -O3 -fomit-frame-pointer -Wall
+CFLAGS = -g -O3 -fomit-frame-pointer -Wall
 # [note that -Wall is a gcc-specific compilation flag ("all warnings on")]
 LDFLAGS =
 O = .o
@@ -53,9 +57,9 @@ EXES = $(PNGCRUSH)$(E)
 # implicit make rules -------------------------------------------------------
 
 .c$(O): png.h cexcept.h $(ZHDR)
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 #.c$(O): png.h pngconf.h pngcrush.h cexcept.h pngpriv.h $(ZHDR)
-#	$(CC) -c $(CFLAGS) $<
+#	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 
 # dependencies --------------------------------------------------------------
@@ -66,9 +70,9 @@ png.h:
 	ln -s $(PNGINC)/png.h png.h
  
 pngcrush$(O): pngcrush.c cexcept.h
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 # pngcrush$(O): pngcrush.c png.h pngconf.h pngcrush.h cexcept.h $(ZHDR)
-# 	$(CC) -c $(CFLAGS) $<
+# 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 $(PNGCRUSH)$(E): $(OBJS)
 	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)

@@ -3,6 +3,388 @@
 
 Change log:
 
+Version 1.8.1 (built with libpng-1.6.21 and zlib-1.2.8)
+  Added the LICENSE file to the tar and zip distributions.
+  Made "-force" force output even when the IDAT is larger, and added
+    "-noforce" option; "-noforce" is now the default behavior (Bug
+    report #68 at SourceForge by "wintakeall")
+  Use right filename in filesize reduction report (overwrite?inname:outname)
+    (bug report #69 by "wintakeall").
+  Removed some superfluous spaces from the Copyright statement.
+  Added "-speed" option; it avoids using the AVG or PAETH filters which
+    are slower to decode.
+
+Version 1.8.0 (built with libpng-1.6.21 and zlib-1.2.8)
+  Made "-reduce" and "-force" the default behavior.  Removed obsolete
+    options "-plte_len", "-cc", "-nocc", "-double_gamma", "-already_crushed",
+    and "-bit_depth". Removed "things_have_changed" code.
+
+Version 1.7.92 (built with libpng-1.6.20 and zlib-1.2.8)
+  Deleted png_read_update_info() statement that was mistakenly added to
+    version 1.7.89. It caused "bad adaptive filter value" errors.
+
+Version 1.7.91 (built with libpng-1.6.20 and zlib-1.2.8)
+  Suppress warning about "damaged LZ stream" when bailing out and building
+    with libpng-1.7.0beta.
+  Added a LICENSE file to the distribution. It points to the actual
+    license appearing in the NOTICES section near the top of pngcrush.c
+  Show if pngcrush is built with bundled or system libpng and zlib.
+  Fixed segfault while writing a -loco MNG (bug found with AFL, reported
+    by Brian Carpenter). Bug was introduced in pngcrush-1.7.35.
+
+Version 1.7.88 (built with libpng-1.6.19 and zlib-1.2.8)
+  Eliminated a potential overflow while adding iTXt chunk (over-length
+    text_lang or text_lang_key), reported by Coverity.
+
+Version 1.7.87 (built with libpng-1.6.18 and zlib-1.2.8)
+  Fixed a double-free bug (CVE-2015-7700). There was a "free" of the
+    sPLT chunk structure in pngcrush and then again in png.c (Bug report
+    by Brian Carpenter).
+  Added common-law trademark notice and export control information.
+  Rearranged some paragraphs in the comments at the beginning of pngcrush.c
+  Increased some buffer sizes in an attempt to prevent possible overflows.
+
+Version 1.7.86 (built with libpng-1.6.18 and zlib-1.2.8)
+  Increased maximum size of a text chunk input from 260 to 2048
+    (STR_BUF_SIZE) bytes, to agree with the help screen (bug report by
+    Tamas Jursonovics).
+  Fixed bug that caused text chunks after IDAT to be written only when
+    the "-save" option is used.
+
+Version 1.7.85 (built with libpng-1.6.16 and zlib-1.2.8)
+  Improved reporting of invalid chunk names. Does not try to put
+    non-printable characters in STDERR; displays hex numbers instead.
+  Fixed include path for utime.h on MSVC (Louis McLaughlin).
+  Eliminated "FAR" memory support (it was removed from libpng at version
+    1.6.0).
+  Disabled the "-already_crushed" option which does not really work well.
+
+Version 1.7.84 (built with libpng-1.6.16 and zlib-1.2.8)
+  Cleaned up more Coverity-scan warnings. Fixing those also fixed
+    CVE-2015-2158.
+
+Version 1.7.83 (built with libpng-1.6.16 and zlib-1.2.8)
+  Cleaned up some Coverity-scan warnings.  Unfortunately one of these
+    changes introduced the vulnerability reported in CVE-2015-2158.
+
+Version 1.7.82 (built with libpng-1.6.16 and zlib-1.2.8)
+
+Version 1.7.81 (built with libpng-1.6.15 and zlib-1.2.8)
+  Fixed off-by-one error in calculation of plte_len. Bug reports by
+    Ivan Kuchin and Frederic Kayser.
+
+Version 1.7.80 (built with libpng-1.6.14 and zlib-1.2.8)
+  Added "-reduce_palette" and "-noreduce_palette" options.  Enable
+    reduce_palette when the "-new" or "-reduce" option is used.
+
+Version 1.7.79 (built with libpng-1.6.14 and zlib-1.2.8)
+  Fixed bug in -plte_len N option.
+
+Version 1.7.78 (built with libpng-1.6.14 and zlib-1.2.8)
+  Made "-s" and "-silent" options suppress libpng warnings.
+
+Version 1.7.77 (built with libpng-1.6.13 and zlib-1.2.8)
+  Updated libpng to version 1.6.13.
+
+Version 1.7.76 (built with libpng-1.6.12 and zlib-1.2.8)
+  Updated libpng to version 1.6.12.
+
+Version 1.7.75 (built with libpng-1.6.10 and zlib-1.2.8)
+  Reverted libpng to version 1.6.10 due to a misplaced statement in png.c
+
+Version 1.7.74 (built with libpng-1.6.11 and zlib-1.2.8)
+  Fixed "-zmem" option (only "-zm" would work since version 1.7.62).
+
+Version 1.7.73 (built with libpng-1.6.10 and zlib-1.2.8)
+  Restored calls to png_set_crc_action() which had been removed from
+    version 1.7.72 for some testing and inadvertently not restored. 
+  Changed "fix" internal variable name to "salvage" (still set with "-fix")
+  Added code to fix/salvage PNG with "bad adaptive filter value" error.
+  Avoid calculating CRC during compression trials except for the last trial,
+    when the output is actually written.
+  Fixed a bug with reducing 16-bit images to 8-bit using "-reduce" option.
+    
+Version 1.7.72 (built with libpng-1.6.10 and zlib-1.2.8)
+
+Version 1.7.71 (built with libpng-1.6.9 and zlib-1.2.8)
+  Built the Windows binaries using -DTOO_FAR=32767; neglected to do this
+    in versions 1.7.42 through 1.7.70, which caused the Windows binaries
+    to produce different (usually a few bytes larger) results than Linux.
+    Thanks to F. Kayser for reporting the discrepancy.
+
+Version 1.7.70 (built with libpng-1.6.8 and zlib-1.2.8)
+
+Version 1.7.69 (built with libpng-1.6.6 and zlib-1.2.8)
+  Updated libpng to version 1.6.6.
+
+Version 1.7.68 (built with libpng-1.6.4 and zlib-1.2.8)
+  Check for NULL return from malloc().
+  Undefine CLOCKS_PER_SECOND "1000" found in some version of MinGW.
+  Replaced most "atoi(argv[++i])" with "pngcrush_get_long" which does
+    "BUMP_I; strtol(argv[i],ptr,10)" and added pngcrush_check_long macro
+    to detect malformed or missing parameters (debian bug 716149).
+  Added global_things_have_changed=1 when reading -bkgd.
+  The "-bit_depth N" option did not work reliably and has been removed.
+
+Version 1.7.67 (built with libpng-1.5.17 and zlib-1.2.8)
+  Fixed handling of "-text" and "-ztext" options for text input. They had been
+    reduced to "-t" and "-z" with an incorrect argument (3 instead of 2) in
+    version 1.7.62. Bug report and patch from Tsukasa Oi.
+
+Version 1.7.66 (built with libpng-1.5.17 and zlib-1.2.8)
+  Revised pngcrush_examine_pixels_fn() to fix some incorrect reductions.
+
+Version 1.7.65 (built with libpng-1.5.17 and zlib-1.2.8)
+  Do not allow any colortype or depth reductions if acTL is present.
+  Added warnings to explain why any requested reductions were not allowed.
+
+Version 1.7.64 (built with libpng-1.5.17 and zlib-1.2.8)
+
+Version 1.7.63 (built with libpng-1.5.16 and zlib-1.2.8)
+  Add "int dowildcard=-1;" in an attempt to get wildcard arguments working
+    in the cross-compiled MinGW executables.
+
+Version 1.7.62 (built with libpng-1.5.16 and zlib-1.2.8)
+  Remove old filename before renaming, when using the "-ow" option on
+    any Windows platform, not just CYGWIN (see log entry for pngcrush-1.7.43).
+  Reverted error with handling single-character options like "-v", introduced
+    in 1.7.61.
+
+Version 1.7.61 (built with libpng-1.5.16 and zlib-1.2.8)
+  Check sBIT chunk data to see if reduction to gray or to 8-bit is permitted,
+    i.e., the RGB sBIT values are equal to each other or the sBIT values are
+    not greater than 8, respectively.
+  Do not try to make_opaque if the tRNS chunk is found.
+  Added warning when ignoring an invalid commandline option.
+  Improved brute_force handling with specified level, filter, or strategy.
+
+Version 1.7.60 (built with libpng-1.5.16 and zlib-1.2.8)
+  Revise -reduce so reducing from color-type 6 to grayscale works.
+  Issue a warning if reducing bit depth or color type would violate various
+    chunk dependencies, and do not perform the action:
+    Do not reduce to grayscale if a color bKGD chunk, sBIT or iCCP chunk
+       is present.
+    Do not reduce bit depth if bKGD or sBIT chunk is present.
+    Do not reduce palette length if the hIST chunk is present.
+  Set "found_iCCP" flag to zero to avoid re-reading a bad iCCP chunk.
+
+Version 1.7.59 (built with libpng-1.5.16 and zlib-1.2.8)
+  Show the acTL chunk in the chunk list in verbose output.
+  Fixed several bugs reported by pornel at users.sf.net:
+    Do not call png_set_benign_errors when PNG_BENIGN_ERRORS_SUPPORTED
+      is not defined
+    Renamed PNG_UNUSED() macro PNGCRUSH_UNUSED().
+    Moved a closing bracket inside the PNGCRUSH_LOCO block.
+    Moved the declaration of "new_mng" outside a PNGCRUSH_LOCO block.
+    Put reference to "input_format" inside a PNGCRUSH_LOCO block.
+    Moved declarations of mng_out and mngname inside a PNGCRUSH_LOCO block.
+
+Version 1.7.58 (built with libpng-1.5.15 and zlib-1.2.7-1)
+  Do not enable reduce_palette by default for "-reduce", "-new", or "-old".
+    It still is failing for some files.
+
+Version 1.7.57 (built with libpng-1.5.15 and zlib-1.2.7-1)
+  Added "-new" option that turns on "-reduce" which will be
+    the default setting for version 1.8.0 and beyond.
+  Added "-old" option that turns off "-reduce" which is the
+    current default setting.
+  Updated copyright year for zlib-1.2.7-1.
+  Reverted to libpng-1.5.15 to be able to read old PNG files with TOO FAR
+    errors.  This will of course only work with the embedded libpng.
+
+Version 1.7.56 (built with libpng-1.6.1 and zlib-1.2.7-1)
+  Only use pngcrush_debug_malloc() and pngcrush_debug_free() if the result
+    is going to be shown.
+  Added PNG_PASS_ROWS, PNG_UNUSED, and other macro definitions, when building
+    with libpng-1.4.x and older libpng versions.
+  Multiplied rowbytes by 8/bit_depth when using the system library because
+    we do not call png_read_transform_info(). This prevents a crash when
+    reading sub-8-bit input files.
+
+Version 1.7.55 (built with libpng-1.6.1 and zlib-1.2.7-1)
+
+Version 1.7.54 (built with libpng-1.6.1rc01 and zlib-1.2.7-1)
+
+Version 1.7.53 (built with libpng-1.6.1rc01 and zlib-1.2.7)
+  Removed plte_len stuff from the "To do" list because it is done.
+  Shorten the indexed-PNG tRNS chunk length if it has more entries than the PLTE chunk.
+
+Version 1.7.52 (built with libpng-1.6.1beta06 and zlib-1.2.7)
+  Added license info for cexcept.h, libpng, and zlib.
+  Added consideration of "zopfli" compression to the "To do" list.
+  Fixed a typo that caused a cHRM chunk to be "found" if an iCCP chunk
+    were present.
+  Reset best_byte_count before trial loop.
+  Revise global png_set_keep_unknown_chunks() calls to avoid a libpng16
+    warning.
+  Reset "intent" to "specified_intent" before trial loop.
+  Reset "plte_len" to "specified_plte_len" before trial loop.
+  Initialize length of each trial to 0x7fffffff so any untried method
+    is not the "best method".
+ 
+Version 1.7.51 (built with libpng-1.6.0 and zlib-1.2.7)
+  Added "-noreduce" option, in preparation for "-reduce" becoming the
+    default behaviour in version 1.8.0.  This turns off lossless bit depth,
+    color type, palette reduction, and opaque alpha channel removal.
+  Zero out the high byte of transparent color for color-type 0 and 2,
+    when reducing from 16 bits to 8.
+  Undefined a bunch of stuff in pngcrush.h that we do not use, saves about
+    100 kbytes of executable file size in addition to about 50k saved by
+    undefining the simplified API.
+  Fixed double-underscore typo in an #ifdef in png.c
+  If "-reduce" is on and the background index is larger than the reduced
+    palette_length+1, reduce it to the palette_length+1.
+  Increased required_window_size if necessary to account for slightly larger
+    size of interlaced files due to additional filter bytes and padding.
+
+Version 1.7.50 (built with libpng-1.6.0 and zlib-1.2.7)
+  Removed completed items from the "To do" list.
+  Ignore the argument of the "plte_len" argument and just set the
+    "reduce_palette" flag.
+
+Version 1.7.49 (built with libpng-1.5.14 and zlib-1.2.7)
+  Use png_set_benign_errors() to allow certain errors in the input file
+    to be handled as warnings.
+  Skip PNG_ABORT redefinition when using libpng-1.4.0 and later.
+  Implemented "-reduce" option to identify and reduce all-gray images,
+    all-opaque images, unused PLTE entries, and 16-bit images that can be
+    reduced losslessly to 8-bit.
+
+Version 1.7.48 (built with libpng-1.5.14 and zlib-1.2.7)
+  Reserved method==0 for examining the pixels during trial 0, if necessary.
+    Changed blacken_fn() to separate pngcrush_examine_pixels_fn() and
+    pngcrush_transform_pixels_fn() callback functions.  The "examine"
+    function is only done during trial 0; it sets a flag whether
+    any fully transparent pixels were found, and pngcrush only runs
+    pngcrush_transform_pixels_fn() if necessary.
+  This is in preparation for future versions, which will examine other
+    conditions such as if the image is opaque or gray or can be losslessly
+    reduced in bit depth, set flags in trial 0 and accomplish the
+    transformations in the remaining trials (see the To do list starting
+    about line 200 in the pngcrush.c source).
+  Removed "PNGCRUSH_COUNT_COLORS" blocks again.
+
+Version 1.7.47 (built with libpng-1.5.13 and zlib-1.2.7)
+  Do not do the heuristic trials of the first 10 methods when -brute is
+    specified, because it did not save time as I hoped.
+  Fixed a mistake in 1.7.45 and 1.7.46 that caused the output file to
+    not be written.
+
+Version 1.7.46 (built with libpng-1.5.13 and zlib-1.2.7)
+  Moved the new level 0 methods to the end of the trial list (methods 137-148)
+
+Version 1.7.45 (built with libpng-1.5.13 and zlib-1.2.7)
+  Added method 0 (uncompressed). "-m 0" now simply turns on method 0.
+  Added "-try10" option that has the same effect that "-m 0" previously did,
+    namely to try only the first ten methods.
+  Inserted new methods 17 through 21 with zlib level 0.
+  Do the heuristic trials of the first 10 methods when -brute is specified,
+    to get quickly to a small solution, so we can bail out of most of the
+    remaining trials early. Previously these 10 methods were skipped during
+    a -brute run.
+  Removed the "-reduce" line from the help screen when PNGCRUSH_COUNT_COLORS
+    is disabled.
+
+Version 1.7.44 (built with libpng-1.5.14 and zlib-1.2.7)
+
+Version 1.7.43 (built with libpng-1.5.13 and zlib-1.2.7)
+  Added "remove(inname)" before "rename(outname, inname)" when using the "-ow"
+    option on CYGWIN/MinGW because "rename()" does not work if the target file
+    exists.
+  Use the bundled "zlib.h" when PNGCRUSH_H is defined, otherwise use the
+    system <zlib.h>.
+
+Version 1.7.42 (built with libpng-1.5.13 and zlib-1.2.7)
+  Use malloc() and free() instead of png_malloc_default() and
+    png_free_default().  This will be required to run with libpng-1.7.x.
+  Revised the PNG_ABORT definition in pngcrush.h to work with libpng-1.7.x.
+  Revised zutil.h to avoid redefining ptrdiff_t on MinGW/CYGWIN platforms.
+
+Version 1.7.41 (built with libpng-1.5.13 and zlib-1.2.7)
+  Reverted to version 1.7.38.  Versions 1.7.39 and 1.7.40 failed to
+    open an output file.
+
+Version 1.7.40 (built with libpng-1.5.13 and zlib-1.2.7)
+  Revised the "To do" list.
+
+Version 1.7.39 (built with libpng-1.5.13 and zlib-1.2.7)
+  Removed "PNGCRUSH_COUNT_COLORS" blocks which I no longer intend to
+    implement because that feature is already available in ImageMagick.  Kept
+    "reduce_to_gray" and "it_is_opaque" flags which I do hope to implement
+    soon.
+  Changed NULL to pngcrush_default_read_data in png_set_read_fn() calls, to fix
+    an insignificant error introduced in pngcrush-1.7.14, that caused most
+    reads to not go through the alternate read function.  Also always set this
+    function, instead of depending on STDIO_SUPPORTED.
+
+Version 1.7.38 (built with libpng-1.5.13 and zlib-1.2.7)
+  Bail out of a trial if byte count exceeds best byte count so far.  This
+    avoids wasting CPU time on trial compressions of trials that exceed the
+    best compression found so far.
+  Added -bail and -nobail options.  Use -nobail to get a complete report
+    of filesizes; otherwise the report just says ">N" for any trial
+    that exceeds size N where N is the best size achieved so far.
+  Added -blacken option, to enable changing the color samples of any
+    fully-transparent pixels to zero in PNG files with color-type 4 or 6,
+    potentially improving their compressibility. Note that this is an
+    irreversible lossy change: the underlying colors of all fully transparent
+    pixels are lost, if they were not already black.
+
+Version 1.7.37 (built with libpng-1.5.12 and zlib-1.2.7)
+  Reverted pngcrush.c back to 1.7.35 and fixed the bug with PLTE handling.
+
+Version 1.7.36 (built with libpng-1.5.12 and zlib-1.2.7)
+  Reverted pngcrush.c to version 1.7.34 because pngcrush is failing with
+    some paletted PNGs.
+  Separated CFLAGS and CPPFLAGS in the makefile (with "-I" and "-DZ_SOLO"
+    in CPPFLAGS)
+
+Version 1.7.35 (built with libpng-1.5.12 and zlib-1.2.7)
+  Removed FOPEN of fpout except for the last trial.  The open files caused
+    "pngcrush -brute -e _ext.png *.png" to fail on the 10th file (about the
+    1024th compression trial) due to being unable to open the output file.
+
+Version 1.7.34 (built with libpng-1.5.12 and zlib-1.2.7)
+  Compute and report sum of critical chunk lengths IHDR, PLTE, IDAT, and IEND,
+    plus the 8-byte PNG signature instead of just the total IDAT data length.
+    Simplify finding the lengths from the trial compressions, by replacing
+    the write function with one that simply counts the bytes that would have
+    been written to a trial PNG, instead of actually writing a PNG, reading it
+    back, and counting the IDAT bytes.
+  Removed comments about the system library having to be libpng14 or earlier.
+    This restriction was fixed in version 1.7.20.
+
+Version 1.7.33  (built with libpng-1.5.12 and zlib-1.2.7)
+  Ignore all ancillary chunks except during the final trial.  This can be
+    significantly faster when large ancillary chunks such as iCCP and zTXt
+    are present.
+
+Version 1.7.32  (built with libpng-1.5.12 and zlib-1.2.7)
+  Fixed bug introduced in 1.7.30: Do not call png_set_check_for_invalid_index()
+    when nosave != 0 (otherwise pngcrush crashes with the "-n" option).
+
+Version 1.7.31  (built with libpng-1.5.11 and zlib-1.2.7)
+  Dropped *.tar.bz2 from distribution.
+  Added a comma that was missing from one of the "usage" strings (error
+    introduced in version 1.7.29).
+
+Version 1.7.30  (built with libpng-1.5.11 and zlib-1.2.7)
+  Only run the new (in libpng-1.5.10) test of palette indexes during the
+    first trial.
+
+Version 1.7.29  (built with libpng-1.5.10 and zlib-1.2.7)
+  Set "things_have_changed" flag when adding text chunks, so the "-force"
+    option is no longer necessary when adding text to an already-compressed
+    file.
+  Direct usage message and error messages to stderr instead of stdout. If
+    anyone is still using DOS they may have to change the "if 0" at line
+    990 to "if 1".  If you need to have the messages on standard output
+    as in the past, use 2>&1 to redirect them.
+  Added "pngcrush -n -v files.png" to the usage message.
+
+Version 1.7.28  (built with libpng-1.5.10 and zlib-1.2.7)
+  Write proper copyright year for zlib, depending upon ZLIB_VERNUM
+
 Version 1.7.27  (built with libpng-1.5.10 and zlib-1.2.6)
   Increased row_buf malloc to row_bytes+64 instead of row_bytes+16, to
     match the size of big_row_buf in pngrutil.c (it is 48 in libpng14, 15, 16,
@@ -114,7 +496,7 @@ Version 1.7.7  (built with libpng-1.4.0 and zlib-1.2.3.4)
 Version 1.7.6  (built with libpng-1.4.0rc02 and zlib-1.2.3.2)
   Change some "#if defined(X)" to "#ifdef X" according to libpng coding style.
   Added some defines to suppress pedantic warnings from libpng-1.2.41beta15
-    and later.  A warning about deprecated access to png_ptr->zstream is 
+    and later.  A warning about deprecated access to png_ptr->zstream is
     otherwise unavoidable.  When building the embedded libpng, a warning
     about png_default_error() returning is also otherwise unavoidable.
   Write premultiplied alpha if output extension is .ppng and
@@ -416,7 +798,7 @@ Version 1.4.5 (built with libpng-1.0.7rc2 and cexcept-1.0.0)
   or grayscale when fewer than 257 RGBA combinations are present,
   and no color is present that requires 16-bit precision.  For now,
   it only reports the frequencies.
-  
+
   Added "-fix" option, for fixing bad CRCs and other correctable
   conditions.
 
@@ -507,7 +889,7 @@ Version 1.3.3 (built with libpng-1.0.5m)
   arithmetic is not enabled.
 
 Version 1.3.2 (built with libpng-1.0.5k)
-  
+
   Renamed "dirname" to "directory_name" to avoid conflict with "dirname"
   that appears in string.h on some platforms.
 
