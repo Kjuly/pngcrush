@@ -9,19 +9,25 @@ Its main purpose is to reduce the size of the PNG IDAT datastream by trying vari
 
 [URL:Source on Sourceforge]: http://pmt.sourceforge.net/pngcrush/
 
-
 # Usage
 
 1. Put your all png files into "workspace_in" folder;  
 2. Run `batch_script.sh` to recompress png files:
 
         $ ./batch_script.sh
-        
+
 3. All recompressed png files will be outputed into "workspace_out" folder;  
 4. Copy the files in "workspace_out" folder to your desired place;  
 5. Rm all files in "workspace_in" & "workspace_out" folders.
 
-__Note__: The binary files under `./pngcrush/` were built by "GNU Make" (v3.81), you can build by yourself if want.  
+__Note__: The binary files under `./pngcrush/` were built by "GNU Make" (v3.81), you can build by yourself if want.
+
+# Build
+
+The executable is however present in the `./pngcrush/` directory built by "GNU Make" (v4.1). In case if the executable is not working or you want to build it yourself.
+
+    make clean
+    make
 
 # License
 
@@ -34,4 +40,3 @@ The source except for pngcrush lib is also here granted for anyone by Kjuly.
 The author of pngcrush is Glenn Randers-Pehrson ( glennrp@users.sf.net )
 
 This repo is maintained by Kjuly ( dev@kjuly.com ). Based on pngcrush project, added `.batch_script.sh` to do batch job easier.
-
