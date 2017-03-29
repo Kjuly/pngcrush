@@ -24,8 +24,10 @@ Its main purpose is to reduce the size of the PNG IDAT datastream by trying vari
 
 The executable is however present in the `./pngcrush/` directory built by "GNU Make" (v4.1). In case if the executable is not working or you want to build it yourself.
 
+    cd ./pngcrush
     make clean
     make
+    cd -
 
 # License
 
